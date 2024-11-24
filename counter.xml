@@ -1,0 +1,38 @@
+<SystemConfiguration>
+    <Application>
+        <FunctionBlock name="Counter">
+            <EventInputs>
+                <Event name="REQ"/>
+            </EventInputs>
+            <EventOutputs>
+                <Event name="CNF"/>
+            </EventOutputs>
+            <DataInputs>
+                <Data name="INC" type="BOOL"/>
+            </DataInputs>
+            <DataOutputs>
+                <Data name="COUNT" type="INT"/>
+            </DataOutputs>
+            <InternalVars>
+                <Var name="count" type="INT" initial="0"/>
+            </InternalVars>
+            <Algorithms>
+                <Algorithm name="INC_COUNT">
+                    <ST>
+                        IF INC THEN
+                            count := count + 1;
+                        END_IF;
+                    </ST>
+                </Algorithm>
+            </Algorithms>
+            <ECC>
+                <ECState name="START">
+                    <ECAction>
+                        <Action name="INC_COUNT"/>
+                    </ECAction>
+                    <ECTransition condition="TRUE" target="START"/>
+                </ECState>
+            </ECC>
+        </FunctionBlock>
+    </Application>
+</SystemConfiguration>
