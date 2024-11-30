@@ -4,6 +4,7 @@ import time
 import threading
 import random
 
+
 class FunctionBlock:
     def __init__(self, name, inc=False, count=None, message=""):
         self.name = name
@@ -16,13 +17,17 @@ class FunctionBlock:
             self.count += 1
         return self.count, self.message
 
+
 def load_program(xml_data):
     root = ET.fromstring(xml_data)
     fb_name = root.find(".//FunctionBlock").get("name")
     inc = bool(root.find(".//Data[@name='INC']").text) if root.find(".//Data[@name='INC']") is not None else False
-    count = int(root.find(".//Var[@name='count']").get("initial")) if root.find(".//Var[@name='count']") is not None else None
-    message = root.find(".//Var[@name='message']").get("initial") if root.find(".//Var[@name='message']") is not None else ""
+    count = int(root.find(".//Var[@name='count']").get("initial")) if root.find(
+        ".//Var[@name='count']") is not None else None
+    message = root.find(".//Var[@name='message']").get("initial") if root.find(
+        ".//Var[@name='message']") is not None else ""
     return FunctionBlock(fb_name, inc, count, message)
+
 
 def receive_program(host='localhost', port=61499):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -37,6 +42,7 @@ def receive_program(host='localhost', port=61499):
                 if data:
                     return data
 
+
 def run_program(fb, program_number, color):
     while True:
         fb.inc = True
@@ -50,6 +56,7 @@ def run_program(fb, program_number, color):
         print(f"\033[{color}mПрограмма: {fb.name}, Номер: {program_number}\033[0m, {output}")
         fb.inc = False
         time.sleep(1)  # Такт выполнения
+
 
 def main():
     global running
@@ -70,6 +77,7 @@ def main():
         except Exception as e:
             print(f"Ошибка: {e}")
             running = False
+
 
 if __name__ == "__main__":
     main()

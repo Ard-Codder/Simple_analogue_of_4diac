@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9ec778d-7b1c-4522-8219-acd4cf3e1399" name="Changes" comment="Реализован функционал подключения IDE к среде исполнения и автоматическое выполнение программы исполнительной средой (программы счета - counter.xml)">
+      <change beforePath="$PROJECT_DIR$/.idea/Simple analogue of 4diac IDE.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Simple analogue of 4diac IDE.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ide.py" beforeDir="false" afterPath="$PROJECT_DIR$/ide.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runtime.py" beforeDir="false" afterPath="$PROJECT_DIR$/runtime.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,16 +27,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Ard-Codder"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Ard-Codder&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/Ard-Codder/Simple_analogue_of_4diac.git",
-    "accountId": "bd507d9d-716e-40f4-8d07-52e73928b9d0"
+    "accountId": "042415d3-ff8e-4024-be5a-4c9f27919478"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -56,6 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>

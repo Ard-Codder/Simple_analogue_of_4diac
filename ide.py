@@ -1,7 +1,22 @@
 import sys
 import xml.etree.ElementTree as ET
 import socket
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QPushButton, QLabel, QVBoxLayout, QWidget, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QPushButton, QLabel, QVBoxLayout, QWidget, \
+    QMessageBox
+
+
+def load_program_from_file(file_path):
+    tree = ET.parse(file_path)
+    root = tree.getroot()
+    return ET.tostring(root, encoding='utf-8')
+
+
+def send_program_to_runtime(program, host='localhost', port=61499):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((host, port))
+        s.sendall(program)
+        s.close()
+
 
 class IDE(QMainWindow):
     def __init__(self):
@@ -35,36 +50,28 @@ class IDE(QMainWindow):
 
     def load_program(self):
         options = QFileDialog.Options()
-        file_path, _ = QFileDialog.getOpenFileName(self, "Выберите файл программы", "", "XML Files (*.xml);;All Files (*)", options=options)
+        file_path, _ = QFileDialog.getOpenFileName(self, "Выберите файл программы", "",
+                                                   "XML Files (*.xml);;All Files (*)", options=options)
         if file_path:
-            self.program = self.load_program_from_file(file_path)
+            self.program = load_program_from_file(file_path)
             self.status_label.setText(f"Файл загружен: {file_path}")
             self.send_button.setEnabled(True)
-
-    def load_program_from_file(self, file_path):
-        tree = ET.parse(file_path)
-        root = tree.getroot()
-        return ET.tostring(root, encoding='utf-8')
 
     def send_program(self):
         if self.program:
             try:
-                self.send_program_to_runtime(self.program)
+                send_program_to_runtime(self.program)
                 self.status_label.setText("Программа отправлена в исполнительную среду.")
             except Exception as e:
                 QMessageBox.critical(self, "Ошибка", f"Не удалось отправить программу: {e}")
 
-    def send_program_to_runtime(self, program, host='localhost', port=61499):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((host, port))
-            s.sendall(program)
-            s.close()
 
 def main():
     app = QApplication(sys.argv)
     ide = IDE()
     ide.show()
     sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     main()
