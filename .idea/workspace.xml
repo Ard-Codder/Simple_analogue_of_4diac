@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9ec778d-7b1c-4522-8219-acd4cf3e1399" name="Changes" comment="Реализован функционал подключения IDE к среде исполнения и автоматическое выполнение программы исполнительной средой (программы счета - counter.xml)">
+    <list default="true" id="f9ec778d-7b1c-4522-8219-acd4cf3e1399" name="Changes" comment="Добавлена новая программа и реализовано параллельное выполнение отправленных программ на среду">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ide.py" beforeDir="false" afterPath="$PROJECT_DIR$/ide.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runtime.py" beforeDir="false" afterPath="$PROJECT_DIR$/runtime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,18 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Ard-Codder"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Ard-Codder&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Ard-Codder/Simple_analogue_of_4diac.git",
-    "accountId": "bd507d9d-716e-40f4-8d07-52e73928b9d0"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Ard-Codder/Simple_analogue_of_4diac.git&quot;,
+    &quot;accountId&quot;: &quot;bd507d9d-716e-40f4-8d07-52e73928b9d0&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -52,6 +53,7 @@
     "Python.ide.executor": "Run",
     "Python.main.executor": "Run",
     "Python.runtime.executor": "Run",
+    "Python.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -59,7 +61,13 @@
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.ide">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE\test" />
+      <recent name="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.test">
     <configuration name="ide" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Simple analogue of 4diac IDE" />
       <option name="ENV_FILES" value="" />
@@ -126,8 +134,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Simple analogue of 4diac IDE" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE\test\test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.ide" />
         <item itemvalue="Python.runtime" />
         <item itemvalue="Python.main" />
@@ -166,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732460171795</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Добавлена новая программа и реализовано параллельное выполнение отправленных программ на среду">
+      <option name="closed" value="true" />
+      <created>1732464209006</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732464209006</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -183,6 +222,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Первые тесты" />
     <MESSAGE value="Реализован функционал подключения IDE к среде исполнения и автоматическое выполнение программы исполнительной средой (программы счета - counter.xml)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Реализован функционал подключения IDE к среде исполнения и автоматическое выполнение программы исполнительной средой (программы счета - counter.xml)" />
+    <MESSAGE value="Добавлена новая программа и реализовано параллельное выполнение отправленных программ на среду" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлена новая программа и реализовано параллельное выполнение отправленных программ на среду" />
   </component>
 </project>

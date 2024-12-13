@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="demo1" Comment="">
+    <VersionInfo Version="1.0" Author="test" Date="2024-12-13">
+    </VersionInfo>
+    <Application Name="demo1App" Comment="">
+        <SubAppNetwork>
+            <FB Name="OUT_ANY_CONSOLE" Type="OUT_ANY_CONSOLE" Comment="" x="3360" y="310">
+                <Parameter Name="QI" Value="true" Comment=""/>
+            </FB>
+            <FB Name="STRING2STRING" Type="STRING2STRING" Comment="" x="1500" y="400">
+                <Parameter Name="IN" Value="'hello'" Comment=""/>
+            </FB>
+            <EventConnections>
+                <Connection Source="STRING2STRING.CNF" Destination="OUT_ANY_CONSOLE.REQ" Comment="" dx1="530"/>
+                <Connection Source="OUT_ANY_CONSOLE.CNF" Destination="STRING2STRING.REQ" Comment="" dx1="60" dx2="60" dy="45"/>
+            </EventConnections>
+            <DataConnections>
+                <Connection Source="STRING2STRING.OUT" Destination="OUT_ANY_CONSOLE.IN" Comment="" dx1="530"/>
+            </DataConnections>
+        </SubAppNetwork>
+    </Application>
+    <Device Name="FORTE_PC" Type="FORTE_PC" Comment="" x="1950" y="720">
+        <Parameter Name="MGR_ID" Value='"localhost:61499"' Comment="Device manager socket ID"/>
+        <Attribute Name="Profile" Type="STRING" Value="HOLOBLOC"/>
+        <Attribute Name="Color" Type="STRING" Value="255,190,111"/>
+        <Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0" y="0">
+            <FBNetwork>
+                <FB Name="demo1App.STRING2STRING" Type="STRING2STRING" Comment="" x="1500" y="400">
+                    <Parameter Name="IN" Value="'hello'" Comment=""/>
+                </FB>
+                <FB Name="demo1App.OUT_ANY_CONSOLE" Type="OUT_ANY_CONSOLE" Comment="" x="3360" y="310">
+                    <Parameter Name="QI" Value="true" Comment=""/>
+                </FB>
+                <EventConnections>
+                    <Connection Source="demo1App.STRING2STRING.CNF" Destination="demo1App.OUT_ANY_CONSOLE.REQ" Comment="" dx1="530"/>
+                    <Connection Source="demo1App.OUT_ANY_CONSOLE.CNF" Destination="demo1App.STRING2STRING.REQ" Comment="" dx1="60" dx2="60" dy="45"/>
+                    <Connection Source="START.COLD" Destination="demo1App.STRING2STRING.REQ" Comment="" dx1="390"/>
+                    <Connection Source="START.WARM" Destination="demo1App.STRING2STRING.REQ" Comment="" dx1="390"/>
+                </EventConnections>
+                <DataConnections>
+                    <Connection Source="demo1App.STRING2STRING.OUT" Destination="demo1App.OUT_ANY_CONSOLE.IN" Comment="" dx1="530"/>
+                </DataConnections>
+            </FBNetwork>
+        </Resource>
+    </Device>
+    <Segment Name="Ethernet" Type="Ethernet" Comment="" x="2095" y="1700" dx1="1500">
+        <Attribute Name="Color" Type="STRING" Value="70,153,214"/>
+    </Segment>
+    <Mapping From="demo1App.STRING2STRING" To="FORTE_PC.EMB_RES"/>
+    <Mapping From="demo1App.OUT_ANY_CONSOLE" To="FORTE_PC.EMB_RES"/>
+    <Link SegmentName="Ethernet" CommResource="FORTE_PC" Comment="">
+    </Link>
+</System>

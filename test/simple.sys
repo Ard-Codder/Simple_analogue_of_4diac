@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="simple" Comment="">
+    <VersionInfo Version="1.0" Author="test" Date="2024-12-14">
+    </VersionInfo>
+    <Application Name="simpleApp" Comment="">
+        <SubAppNetwork>
+            <FB Name="OUT_ANY_CONSOLE" Type="OUT_ANY_CONSOLE" Comment="" x="3360" y="310">
+                <Parameter Name="QI" Value="true" Comment=""/>
+                <Parameter Name="IN" Value="'Hello, World!'" Comment=""/>
+            </FB>
+            <FB Name="EVENT_RISING_EDGE" Type="EVENT_RISING_EDGE" Comment="" x="1500" y="400">
+                <Parameter Name="IN" Value="true" Comment=""/>
+            </FB>
+            <EventConnections>
+                <Connection Source="EVENT_RISING_EDGE.Q" Destination="OUT_ANY_CONSOLE.REQ" Comment="" dx1="530"/>
+            </EventConnections>
+            <DataConnections>
+                <Connection Source="EVENT_RISING_EDGE.OUT" Destination="OUT_ANY_CONSOLE.IN" Comment="" dx1="530"/>
+            </DataConnections>
+        </SubAppNetwork>
+    </Application>
+    <Device Name="FORTE_PC" Type="FORTE_PC" Comment="" x="1950" y="720">
+        <Parameter Name="MGR_ID" Value='"localhost:61499"' Comment="Device manager socket ID"/>
+        <Attribute Name="Profile" Type="STRING" Value="HOLOBLOC"/>
+        <Attribute Name="Color" Type="STRING" Value="255,190,111"/>
+        <Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0" y="0">
+            <FBNetwork>
+                <FB Name="simpleApp.OUT_ANY_CONSOLE" Type="OUT_ANY_CONSOLE" Comment="" x="3360" y="310">
+                    <Parameter Name="QI" Value="true" Comment=""/>
+                    <Parameter Name="IN" Value="'Hello, World!'" Comment=""/>
+                </FB>
+                <FB Name="simpleApp.EVENT_RISING_EDGE" Type="EVENT_RISING_EDGE" Comment="" x="1500" y="400">
+                    <Parameter Name="IN" Value="true" Comment=""/>
+                </FB>
+                <EventConnections>
+                    <Connection Source="simpleApp.EVENT_RISING_EDGE.Q" Destination="simpleApp.OUT_ANY_CONSOLE.REQ" Comment="" dx1="530"/>
+                    <Connection Source="START.COLD" Destination="simpleApp.EVENT_RISING_EDGE.REQ" Comment="" dx1="390"/>
+                    <Connection Source="START.WARM" Destination="simpleApp.EVENT_RISING_EDGE.REQ" Comment="" dx1="390"/>
+                </EventConnections>
+                <DataConnections>
+                    <Connection Source="simpleApp.EVENT_RISING_EDGE.OUT" Destination="simpleApp.OUT_ANY_CONSOLE.IN" Comment="" dx1="530"/>
+                </DataConnections>
+            </FBNetwork>
+        </Resource>
+    </Device>
+    <Segment Name="Ethernet" Type="Ethernet" Comment="" x="2095" y="1700" dx1="1500">
+        <Attribute Name="Color" Type="STRING" Value="70,153,214"/>
+    </Segment>
+    <Mapping From="simpleApp.OUT_ANY_CONSOLE" To="FORTE_PC.EMB_RES"/>
+    <Mapping From="simpleApp.EVENT_RISING_EDGE" To="FORTE_PC.EMB_RES"/>
+    <Link SegmentName="Ethernet" CommResource="FORTE_PC" Comment="">
+    </Link>
+</System>
