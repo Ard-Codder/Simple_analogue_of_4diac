@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9ec778d-7b1c-4522-8219-acd4cf3e1399" name="Changes" comment="Добавлена новая программа и реализовано параллельное выполнение отправленных программ на среду">
+    <list default="true" id="f9ec778d-7b1c-4522-8219-acd4cf3e1399" name="Changes" comment="Тестирование">
+      <change beforePath="$PROJECT_DIR$/.idea/Simple analogue of 4diac IDE.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Simple analogue of 4diac IDE.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ide.py" beforeDir="false" afterPath="$PROJECT_DIR$/ide.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runtime.py" beforeDir="false" afterPath="$PROJECT_DIR$/runtime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/counter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello_world.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ide.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runtime.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Test2_FORTE_PC.fboot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/demo1.fboot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/demo1.sys" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/forte.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/simple.fboot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/simple.sys" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +35,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -51,45 +64,31 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.ide.executor": "Run",
+    "Python.main (1).executor": "Run",
     "Python.main.executor": "Run",
+    "Python.main_window (1).executor": "Run",
+    "Python.main_window.executor": "Run",
     "Python.runtime.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/kirar/PycharmProjects/Simple analogue of 4diac IDE",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE\test" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE\src" />
+      <recent name="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE" />
+      <recent name="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE\test" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.test">
-    <configuration name="ide" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Simple analogue of 4diac IDE" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ide.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.main_window (1)">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Simple analogue of 4diac IDE" />
       <option name="ENV_FILES" value="" />
@@ -99,11 +98,77 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_window (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Simple analogue of 4diac IDE" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Simple analogue of 4diac IDE" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main_window.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_window" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Simple analogue of 4diac IDE" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE\src\main_window.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -125,7 +190,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runtime.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\kirar\PycharmProjects\Simple analogue of 4diac IDE\test\runtime.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,10 +223,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.ide" />
-        <item itemvalue="Python.runtime" />
+        <item itemvalue="Python.main_window (1)" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main_window" />
+        <item itemvalue="Python.main_window" />
+        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -205,7 +271,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732464209006</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Тестирование">
+      <option name="closed" value="true" />
+      <created>1734132120489</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1734132120489</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -223,6 +297,7 @@
     <MESSAGE value="Первые тесты" />
     <MESSAGE value="Реализован функционал подключения IDE к среде исполнения и автоматическое выполнение программы исполнительной средой (программы счета - counter.xml)" />
     <MESSAGE value="Добавлена новая программа и реализовано параллельное выполнение отправленных программ на среду" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена новая программа и реализовано параллельное выполнение отправленных программ на среду" />
+    <MESSAGE value="Тестирование" />
+    <option name="LAST_COMMIT_MESSAGE" value="Тестирование" />
   </component>
 </project>
