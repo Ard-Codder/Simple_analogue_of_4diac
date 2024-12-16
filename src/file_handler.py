@@ -199,8 +199,8 @@ class FileHandler:
 
             event_connections = fb_network.find('EventConnections')
             data_connections = fb_network.find('DataConnections')
-            FileHandler.create_connections(main_window, event_connections, 'red')
-            FileHandler.create_connections(main_window, data_connections, 'blue')
+            FileHandler.create_connections(main_window, event_connections, 'gray')
+            FileHandler.create_connections(main_window, data_connections, 'black')
             main_window.update_all()
         except Exception as e:
             print("File reading error")

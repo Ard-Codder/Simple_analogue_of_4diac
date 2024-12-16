@@ -115,5 +115,7 @@ class FuncBlock:
         path.addRoundedRect(self.x, self.y, self.width, self.height, 10, 10)  # Закругляем углы
         painter.setBrush(QColor(self.color))
         painter.drawPath(path)
+        font = QFont("Arial", 8)  # Уменьшаем размер шрифта
+        painter.setFont(font)
         for rect in self.rectangles:
             painter.drawText(rect, Qt.AlignCenter, rect.name)

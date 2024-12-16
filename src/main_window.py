@@ -38,9 +38,71 @@ class MainWindow(QMainWindow):
         self.setStyle(QStyleFactory.create('Fusion'))  # Устанавливаем стиль Fusion
 
         # Устанавливаем стиль для меню
-        self.menu_file.setStyleSheet("QMenu { font-size: 12px; }")
-        self.menu_blocks.setStyleSheet("QMenu { font-size: 12px; }")
-        self.menu_run.setStyleSheet("QMenu { font-size: 12px; }")
+        self.menuBar().setStyleSheet("""
+            QMenuBar {
+                background-color: #333333;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            QMenuBar::item {
+                padding: 10px 20px;
+                background-color: #444444;
+                border-radius: 5px;
+            }
+            QMenuBar::item:selected {
+                background-color: #555555;
+            }
+        """)
+
+        self.menu_file.setStyleSheet("""
+            QMenu {
+                background-color: #333333;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            QMenu::item {
+                padding: 10px 20px;
+                background-color: #444444;
+                border-radius: 5px;
+            }
+            QMenu::item:selected {
+                background-color: #555555;
+            }
+        """)
+        self.menu_blocks.setStyleSheet("""
+            QMenu {
+                background-color: #333333;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            QMenu::item {
+                padding: 10px 20px;
+                background-color: #444444;
+                border-radius: 5px;
+            }
+            QMenu::item:selected {
+                background-color: #555555;
+            }
+        """)
+        self.menu_run.setStyleSheet("""
+            QMenu {
+                background-color: #333333;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            QMenu::item {
+                padding: 10px 20px;
+                background-color: #444444;
+                border-radius: 5px;
+            }
+            QMenu::item:selected {
+                background-color: #555555;
+            }
+        """)
 
     def update_all(self):
         self.update()
@@ -49,7 +111,7 @@ class MainWindow(QMainWindow):
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        font = QFont("Arial", 9, QFont.Bold)  # Изменяем шрифт
+        font = QFont("Arial", 10)  # Увеличиваем размер шрифта
         painter.setFont(font)
         for block in self.blocks:
             path = QPainterPath()
@@ -57,6 +119,10 @@ class MainWindow(QMainWindow):
             painter.setBrush(QColor(block.color))
             painter.drawPath(path)
             for rect in block.rectangles:
+                sub_path = QPainterPath()
+                sub_path.addRoundedRect(rect.x(), rect.y(), rect.width(), rect.height(), 5, 5)  # Закругляем углы для входов/выходов
+                painter.setBrush(QColor('white'))
+                painter.drawPath(sub_path)
                 painter.drawText(rect, Qt.AlignCenter, rect.name)
 
         for connection in self.connections:
@@ -97,7 +163,9 @@ class MainWindow(QMainWindow):
         self.current_x = event.x()
         self.current_y = event.y()
         self.last_mouse_pos = event.pos()
-        self.label.setText(f"Pressed in ({self.current_x}, {self.current_y})")
+        self.label.setText(f"Mouse position (Pressed): ({self.current_x}, {self.current_y})")
+        self.label.adjustSize()
+        self.label.move(10, 60)  # Опускаем надпись с координатами ниже
 
         self.movable_connection, self.coord = self.check_moving_connect(event)
         self.source_element = self.find_connect_element(is_left_flag=False)
@@ -109,7 +177,8 @@ class MainWindow(QMainWindow):
             elif self.source_element:
                 self.current_connection = ConnectionManager(
                     QPoint(self.source_element.right() + 1, self.source_element.center().y()),
-                    QPoint(self.current_x + 1, self.current_y + 2)
+                    QPoint(self.current_x + 1, self.current_y + 2),
+                    color='black'  # Устанавливаем черный цвет по умолчанию
                 )
                 self.connections.append(self.current_connection)
                 self.drawing_connection = True
@@ -138,9 +207,9 @@ class MainWindow(QMainWindow):
                     (self.destination_element.parent.name, self.destination_element.name)
                 )
                 if (self.source_element.data_element or self.destination_element.data_element):
-                    self.current_connection.color = 'blue'
+                    self.current_connection.color = 'black'
                 else:
-                    self.current_connection.color = 'red'
+                    self.current_connection.color = 'gray'
                 self.source_element.connect_lines.append(self.current_connection)
                 self.destination_element.connect_lines.append(self.current_connection)
             else:
@@ -153,14 +222,18 @@ class MainWindow(QMainWindow):
         self.movable_connection = None
         x = event.x()
         y = event.y()
-        self.label.setText(f"Release in ({x}, {y})")
+        self.label.setText(f"Mouse position: ({x}, {y})")
+        self.label.adjustSize()
+        self.label.move(10, 60)  # Опускаем надпись с координатами ниже
         self.update()
 
     def mouseMoveEvent(self, event):
         self.current_x = event.x()
         self.current_y = event.y()
         if self.pressed:
-            self.label.setText(f"Movement of the pressed mouse in ({self.current_x}, {self.current_y})")
+            self.label.setText(f"Mouse position (Pressed): ({self.current_x}, {self.current_y})")
+            self.label.adjustSize()
+            self.label.move(10, 60)  # Опускаем надпись с координатами ниже
             if self.current_block:
                 self.current_block.change_coords(self.current_x, self.current_y)
             elif self.drawing_connection:
@@ -168,7 +241,9 @@ class MainWindow(QMainWindow):
             else:
                 self.change_movable_connection(event)
         else:
-            self.label.setText(f"Mouse movement in ({self.current_x}, {self.current_y})")
+            self.label.setText(f"Mouse position: ({self.current_x}, {self.current_y})")
+            self.label.adjustSize()
+            self.label.move(10, 60)  # Опускаем надпись с координатами ниже
             self.check_moving_connect(event)
 
         self.last_mouse_pos = event.pos()
@@ -215,32 +290,8 @@ class MainWindow(QMainWindow):
         return (None, None)
 
     def create_actions(self):
-        create_start_action = QAction("Start", self)
-        create_start_action.triggered.connect(lambda: cb.create_block_start(self))
-
-        create_int2int_action = QAction("INT2INT", self)
-        create_int2int_action.triggered.connect(lambda: cb.create_block_int2int(self))
-
-        create_out_any_console_action = QAction("OUT_ANY_CONSOLE", self)
-        create_out_any_console_action.triggered.connect(lambda: cb.create_block_out_any_console(self))
-
-        create_string2string_action = QAction("STRING2STRING", self)
-        create_string2string_action.triggered.connect(lambda: cb.create_block_string2string(self))
-
-        create_f_add_action = QAction("F_ADD", self)
-        create_f_add_action.triggered.connect(lambda: cb.create_block_f_add(self))
-
-        self.menu_blocks.addAction(create_start_action)
-        self.menu_blocks.addAction(create_int2int_action)
-        self.menu_blocks.addAction(create_out_any_console_action)
-        self.menu_blocks.addAction(create_string2string_action)
-        self.menu_blocks.addAction(create_f_add_action)
-
         open_project_action = QAction("Open", self)
         open_project_action.triggered.connect(lambda: FileHandler.read_xml(self))
-
-        save_action = QAction("Save", self)
-        save_action.triggered.connect(lambda: FileHandler.create_xml(self.blocks, self.start_block, self.coords_coef, old_file_path=self.file_path))
 
         create_xml_action = QAction("Save as XML", self)
         create_xml_action.triggered.connect(lambda: FileHandler.create_xml(self.blocks, self.start_block, self.coords_coef))
@@ -249,9 +300,29 @@ class MainWindow(QMainWindow):
         create_fboot_action.triggered.connect(lambda: FileHandler.create_fboot(self.blocks, self.start_block))
 
         self.menu_file.addAction(open_project_action)
-        self.menu_file.addAction(save_action)
         self.menu_file.addAction(create_xml_action)
         self.menu_file.addAction(create_fboot_action)
+
+        # Добавляем список блоков в меню "Blocks"
+        start_action = QAction("START", self)
+        start_action.triggered.connect(lambda: cb.create_block_start(self))
+        self.menu_blocks.addAction(start_action)
+
+        int2int_action = QAction("INT2INT", self)
+        int2int_action.triggered.connect(lambda: cb.create_block_int2int(self))
+        self.menu_blocks.addAction(int2int_action)
+
+        out_any_console_action = QAction("OUT_ANY_CONSOLE", self)
+        out_any_console_action.triggered.connect(lambda: cb.create_block_out_any_console(self))
+        self.menu_blocks.addAction(out_any_console_action)
+
+        string2string_action = QAction("STRING2STRING", self)
+        string2string_action.triggered.connect(lambda: cb.create_block_string2string(self))
+        self.menu_blocks.addAction(string2string_action)
+
+        f_add_action = QAction("F_ADD", self)
+        f_add_action.triggered.connect(lambda: cb.create_block_f_add(self))
+        self.menu_blocks.addAction(f_add_action)
 
         deploy_action = QAction('Deploy', self)
         deploy_action.triggered.connect(self.deploy)

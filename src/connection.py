@@ -1,4 +1,4 @@
-from PyQt5.QtGui import QPainter, QPen, QCursor, QPolygon
+from PyQt5.QtGui import QPainter, QPen, QCursor, QPolygon, QColor
 from PyQt5.QtCore import Qt, QLine, QPoint, QRect
 
 class ConnectionManager:
@@ -61,6 +61,7 @@ class ConnectionManager:
             self.point_destination = destination
             self.destination_x = self.point_destination.x()
             self.destination_y = self.point_destination.y()
+
         self.dx1 = dx1
         self.dx2 = dx2
         if dy1:
