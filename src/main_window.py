@@ -12,12 +12,12 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Functional Block Editor")
-        self.setGeometry(100, 100, 800, 600)
+        self.setGeometry(100, 100, 1200, 800)
         self.blocks = []
         self.start_block = None
         self.file_path = '../project_files/project1.xml'
         self.label = QLabel("", self)
-        self.label.setGeometry(10, 10, 300, 50)
+        self.label.setGeometry(10, 10, 300, 100)
         self.current_x = 300
         self.current_y = 300
         self.coords_coef = 5
@@ -111,7 +111,7 @@ class MainWindow(QMainWindow):
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        font = QFont("Arial", 10)  # Увеличиваем размер шрифта
+        font = QFont("Arial", 6)  # Увеличиваем размер шрифта
         painter.setFont(font)
         for block in self.blocks:
             path = QPainterPath()

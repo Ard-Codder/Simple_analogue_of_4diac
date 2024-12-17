@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QLabel, QLineEdit
 from PyQt5.QtGui import QFont
 
 class EditableLabel:
-    def __init__(self, main_window, block=None, rect=None, field='', text="", x=0, y=0, width=100, height=30):
+    def __init__(self, main_window, block=None, rect=None, field="", text="", x=0, y=0, width=100, height=30):
         self.main_window = main_window
         self.block = block
         self.rect = rect
