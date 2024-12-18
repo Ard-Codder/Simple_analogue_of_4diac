@@ -1,9 +1,12 @@
 from PyQt5.QtCore import QRect, QPoint, Qt
 from PyQt5.QtGui import QPainterPath, QColor, QFont
-from editable_label import EditableLabel
+from editable_label import LabelEdit
 
 class MyRect(QRect):
     def __init__(self, *args, parent=None, name=None, **kwargs):
+        """
+        Initialize a custom rectangle with additional properties.
+        """
         super().__init__(*args, **kwargs)
         self.parent = parent
         self.name = name
@@ -19,6 +22,9 @@ class MyRect(QRect):
 
 class FuncBlock:
     def __init__(self, main_window, name=None, x=300, y=300, width=100, height=100, color='white', n_rects_left=4, n_rects_right=4, labels=None):
+        """
+        Initialize a functional block with a name, position, size, color, and labels.
+        """
         self.main_window = main_window
         self.name = name
         self.block_size_coef = 1
@@ -41,13 +47,19 @@ class FuncBlock:
         self.create_rect_values()
 
     def create_label(self):
+        """
+        Create an editable label for the block name.
+        """
         self.label_width = self.width + self.width // 2
         self.label_height = 20
         self.label_x = self.x + (self.width - self.label_width) // 2
         self.label_y = self.y - 25
-        self.editable_label = EditableLabel(main_window=self.main_window, block=self, field='name', text=self.name, x=self.label_x, y=self.label_y, width=self.label_width, height=self.label_height)
+        self.editable_label = LabelEdit(main_window=self.main_window, block=self, field='name', text=self.name, x=self.label_x, y=self.label_y, width=self.label_width, height=self.label_height)
 
     def create_rect_values(self):
+        """
+        Create editable labels for the rectangle values.
+        """
         rect_with_values = ['IN', 'IN1', 'IN2', 'IN3', 'IN4', 'QI', 'LABEL']
         for rect in self.rectangles:
             if rect.name in rect_with_values:
@@ -56,9 +68,12 @@ class FuncBlock:
                 rect.data_element = True
                 rect.value_x = rect.x() - rect.value_width
                 rect.value_y = rect.y() + (rect.height() - rect.value_height) // 2
-                rect.editable_label = EditableLabel(main_window=self.main_window, block=self, rect=rect, field='value', text=rect.value, x=rect.value_x, y=rect.value_y, width=rect.value_width, height=rect.value_height)
+                rect.editable_label = LabelEdit(main_window=self.main_window, block=self, rect=rect, field='value', text=rect.value, x=rect.value_x, y=rect.value_y, width=rect.value_width, height=rect.value_height)
 
     def create_rect(self):
+        """
+        Create the rectangles for the block.
+        """
         self.rectangles.append(MyRect(self.x, self.y, self.width, self.height, name=self.type, parent=self))
         cell_x_left = self.x - self.cell_width
         for cur_rect in range(self.n_rects_left):
@@ -73,6 +88,9 @@ class FuncBlock:
             self.rectangles.append(MyRect(cell_x_right, new_y, self.cell_width, self.cell_height_right, name=self.labels[self.n_rects_left + 1 + cur_rect], parent=self))
 
     def change_coords(self, current_x, current_y):
+        """
+        Change the coordinates of the block and update the connections.
+        """
         for rect in self.rectangles:
             dx = self.main_window.last_mouse_pos.x() - rect.x()
             dy = self.main_window.last_mouse_pos.y() - rect.y()
@@ -111,11 +129,14 @@ class FuncBlock:
             self.y = self.rectangles[0].y()
 
     def draw(self, painter):
+        """
+        Draw the block and its rectangles.
+        """
         path = QPainterPath()
-        path.addRoundedRect(self.x, self.y, self.width, self.height, 10, 10)  # Закругляем углы
+        path.addRoundedRect(self.x, self.y, self.width, self.height, 10, 10)
         painter.setBrush(QColor(self.color))
         painter.drawPath(path)
-        font = QFont("Arial", 8)  # Уменьшаем размер шрифта
+        font = QFont("Arial", 8)
         painter.setFont(font)
         for rect in self.rectangles:
             painter.drawText(rect, Qt.AlignCenter, rect.name)

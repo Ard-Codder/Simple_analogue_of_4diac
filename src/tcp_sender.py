@@ -3,6 +3,9 @@ import struct
 
 class TcpSender:
     def __init__(self, file_path):
+        """
+        Initialize the TCP sender with a file path and send the file content to the server.
+        """
         self.file_path = file_path
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
@@ -13,13 +16,22 @@ class TcpSender:
             print('Error during connection with forte')
 
     def set_connection(self):
+        """
+        Set up the connection to the server.
+        """
         server_address = ('localhost', 61499)
         self.client_socket.connect(server_address)
 
     def disconnect(self):
+        """
+        Disconnect from the server.
+        """
         self.client_socket.close()
 
     def send_fboot(self):
+        """
+        Send the content of the fboot file to the server.
+        """
         print("File path:", self.file_path)
         file = open(self.file_path, 'r')
 

@@ -9,6 +9,9 @@ import custom_blocks as cb
 
 class MainWindow(QMainWindow):
     def __init__(self):
+        """
+        Initialize the main window with menus, actions, and default settings.
+        """
         super().__init__()
         self.setWindowTitle("IDE - FB Editor")
         self.setGeometry(100, 100, 1200, 800)
@@ -34,9 +37,9 @@ class MainWindow(QMainWindow):
         self.movable_connection = None
         self.drawing_connection = False
         self.create_actions()
-        self.setStyle(QStyleFactory.create('Fusion'))  # Устанавливаем стиль Fusion
+        self.setStyle(QStyleFactory.create('Fusion'))
 
-        # Устанавливаем стиль для меню
+        # Set style for the menu bar
         self.menuBar().setStyleSheet("""
             QMenuBar {
                 background-color: #333333;
@@ -104,22 +107,28 @@ class MainWindow(QMainWindow):
         """)
 
     def update_all(self):
+        """
+        Update the entire window, including block names and rectangle values.
+        """
         self.update()
         self.update_block_names()
         self.update_rect_values()
 
     def paintEvent(self, event):
+        """
+        Paint all blocks and connections on the window.
+        """
         painter = QPainter(self)
-        font = QFont("Arial", 6)  # Увеличиваем размер шрифта
+        font = QFont("Arial", 6)  # Increase font size
         painter.setFont(font)
         for block in self.blocks:
             path = QPainterPath()
-            path.addRoundedRect(block.x, block.y, block.width, block.height, 10, 10)  # Закругляем углы
+            path.addRoundedRect(block.x, block.y, block.width, block.height, 10, 10)  # Round the corners
             painter.setBrush(QColor(block.color))
             painter.drawPath(path)
             for rect in block.rectangles:
                 sub_path = QPainterPath()
-                sub_path.addRoundedRect(rect.x(), rect.y(), rect.width(), rect.height(), 5, 5)  # Закругляем углы для входов/выходов
+                sub_path.addRoundedRect(rect.x(), rect.y(), rect.width(), rect.height(), 5, 5)  # Round the corners for inputs/outputs
                 painter.setBrush(QColor('white'))
                 painter.drawPath(sub_path)
                 painter.drawText(rect, Qt.AlignCenter, rect.name)
@@ -134,6 +143,9 @@ class MainWindow(QMainWindow):
             painter.drawPolygon(connection.triangle)
 
     def update_rect_values(self):
+        """
+        Update the positions of the rectangle value labels.
+        """
         for block in self.blocks:
             for rect in block.rectangles:
                 if rect.editable_label:
@@ -142,23 +154,35 @@ class MainWindow(QMainWindow):
                     rect.editable_label.move(rect.value_x, rect.value_y)
 
     def update_block_names(self):
+        """
+        Update the positions of the block name labels.
+        """
         for block in self.blocks:
             name_x = block.x + (block.width - block.label_width) // 2
             name_y = block.y - 25
             block.editable_label.move(name_x, name_y)
 
     def find_block(self):
+        """
+        Find the block that contains the current mouse position.
+        """
         for block in self.blocks:
             if block.rectangles[0].contains(self.current_x, self.current_y):
                 return block
 
     def find_connect_element(self, is_left_flag):
+        """
+        Find the rectangle that contains the current mouse position and matches the is_left_flag.
+        """
         for block in self.blocks:
             for rect in block.rectangles[1:]:
                 if rect.contains(self.current_x, self.current_y) and (rect.is_left is is_left_flag):
                     return rect
 
     def mousePressEvent(self, event):
+        """
+        Handle mouse press events to start moving blocks or drawing connections.
+        """
         self.current_x = event.x()
         self.current_y = event.y()
         self.last_mouse_pos = event.pos()
@@ -177,7 +201,7 @@ class MainWindow(QMainWindow):
                 self.current_connection = ConnectionManager(
                     QPoint(self.source_element.right() + 1, self.source_element.center().y()),
                     QPoint(self.current_x + 1, self.current_y + 2),
-                    color='black'  # Устанавливаем черный цвет по умолчанию
+                    color='black'  # Set default color to black
                 )
                 self.connections.append(self.current_connection)
                 self.drawing_connection = True
@@ -185,6 +209,9 @@ class MainWindow(QMainWindow):
         self.update_all()
 
     def mouseReleaseEvent(self, event):
+        """
+        Handle mouse release events to finish moving blocks or drawing connections.
+        """
         self.current_x = event.x()
         self.current_y = event.y()
         if self.drawing_connection:
@@ -227,6 +254,9 @@ class MainWindow(QMainWindow):
         self.update()
 
     def mouseMoveEvent(self, event):
+        """
+        Handle mouse move events to update the position of blocks or connections.
+        """
         self.current_x = event.x()
         self.current_y = event.y()
         if self.pressed:
@@ -249,6 +279,9 @@ class MainWindow(QMainWindow):
         self.update_all()
 
     def change_movable_connection(self, event):
+        """
+        Change the coordinates of the movable connection.
+        """
         if self.movable_connection:
             if self.movable_connection.simple:
                 if (event.x() - self.movable_connection.x1 > 10) and (self.movable_connection.x3 - event.x() > 10):
@@ -274,6 +307,9 @@ class MainWindow(QMainWindow):
                     )
 
     def check_moving_connect(self, event):
+        """
+        Check if the mouse is over a movable connection and return the connection and coordinate.
+        """
         for connection in self.connections:
             if connection.rect_line2.contains(event.x(), event.y()):
                 self.setCursor(QCursor(Qt.SizeHorCursor))
@@ -289,6 +325,9 @@ class MainWindow(QMainWindow):
         return (None, None)
 
     def create_actions(self):
+        """
+        Create actions for the file and blocks menus.
+        """
         open_project_action = QAction("Open", self)
         open_project_action.triggered.connect(lambda: FileManager.read_xml(self))
 
@@ -302,7 +341,7 @@ class MainWindow(QMainWindow):
         self.menu_file.addAction(create_xml_action)
         self.menu_file.addAction(create_fboot_action)
 
-        # Добавляем список блоков в меню "Blocks"
+        # Add block actions to the Blocks menu
         start_action = QAction("START", self)
         start_action.triggered.connect(lambda: cb.create_block_start(self))
         self.menu_blocks.addAction(start_action)
@@ -328,10 +367,16 @@ class MainWindow(QMainWindow):
         self.menu_run.addAction(deploy_action)
 
     def deploy(self):
+        """
+        Deploy the project by creating an fboot file and sending it via TCP.
+        """
         FileManager.create_fboot(self.blocks, self.start_block, with_gui=False)
         TcpSender('../projects/deploy.fboot')
 
     def show_connections(self):
+        """
+        Print the connections of all blocks to the console.
+        """
         for block in self.blocks:
             print(block.name, block.connections)
             for source_element, ar_elements in block.connections.items():
@@ -340,6 +385,9 @@ class MainWindow(QMainWindow):
                         print(f"Connection Source = {block.name}.{source_element}, Destination = {dest_block_name}.{dest_el}, Comment = ")
 
     def contextMenuEvent(self, event):
+        """
+        Handle context menu events to delete connections or blocks.
+        """
         cur_connection, text = self.check_moving_connect(event)
         if cur_connection:
             line_context_menu = QMenu(self)
@@ -363,20 +411,28 @@ class MainWindow(QMainWindow):
         self.update_all()
 
     def change_connection_color(self, connection):
+        """
+        Change the color of a connection.
+        """
         color = QColorDialog.getColor()
         if color.isValid():
             connection.color = color.name()
             self.update()
 
     def clear(self):
+        """
+        Clear all blocks and connections from the window.
+        """
         while self.blocks:
             self.delete_block(self.blocks[0])
         self.connections = []
-        self.blocks = []
         self.pressed = False
         self.update_all()
 
     def delete_block(self, block):
+        """
+        Delete a block and its connections.
+        """
         for rect in block.rectangles:
             if rect.editable_label:
                 rect.editable_label.delete()
@@ -386,6 +442,9 @@ class MainWindow(QMainWindow):
         block.editable_label.delete()
 
     def delete_connection(self, cur_connection):
+        """
+        Delete a connection from the window.
+        """
         for block in self.blocks:
             for rect in block.rectangles[1:]:
                 for connection in rect.connect_lines:
@@ -399,10 +458,3 @@ class MainWindow(QMainWindow):
         dest_el.connect_lines.remove(cur_connection)
         self.connections.remove(cur_connection)
         self.unsetCursor()
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    app.setStyle("Fusion")
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec_())

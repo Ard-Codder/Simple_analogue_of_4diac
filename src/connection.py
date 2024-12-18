@@ -1,9 +1,12 @@
 from PyQt5.QtCore import QLine, QPoint, QRect
 from PyQt5.QtGui import QPolygon
 
-
 class ConnectionManager:
     def __init__(self, point_source, point_destination, color='black'):
+        """
+        Initialize the ConnectionManager with source and destination points and a color.
+        Determine the type of connection (simple or hard) based on the x-coordinates of the points.
+        """
         self.point_source = point_source
         self.point_destination = point_destination
         self.color = color
@@ -20,6 +23,10 @@ class ConnectionManager:
             self.hard_case()
 
     def simple_case(self, dx1=None, source=None, destination=None):
+        """
+        Handle the simple case where the source x-coordinate is less than the destination x-coordinate.
+        Calculate the intermediate points and draw the connection lines.
+        """
         self.dy1 = None
         self.dx2 = None
         if source:
@@ -54,6 +61,10 @@ class ConnectionManager:
         self.draw_triangle()
 
     def hard_case(self, dx1=20, dx2=20, dy1=None, source=None, destination=None):
+        """
+        Handle the hard case where the source x-coordinate is greater than or equal to the destination x-coordinate.
+        Calculate the intermediate points and draw the connection lines.
+        """
         if source:
             self.point_source = source
             self.source_x = self.point_source.x()
@@ -95,6 +106,9 @@ class ConnectionManager:
         self.draw_triangle()
 
     def change_coords(self, current_point):
+        """
+        Change the coordinates of the destination point and update the connection lines accordingly.
+        """
         self.point_destination = QPoint(current_point.x(), current_point.y())
         self.destination_x = current_point.x()
         self.destination_y = current_point.y()
@@ -105,6 +119,9 @@ class ConnectionManager:
         self.draw_triangle()
 
     def draw_triangle(self):
+        """
+        Draw a triangle at the destination point to indicate the end of the connection.
+        """
         self.triangle_points = [
             self.point_destination,
             QPoint(self.destination_x - 7, self.destination_y - 4),

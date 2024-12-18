@@ -7,10 +7,12 @@ from connection import ConnectionManager
 
 import custom_blocks as cb
 
-
 class FileManager:
     @staticmethod
     def create_fboot(list_blocks, block_start, with_gui=True):
+        """
+        Create an fboot file with the given blocks and connections.
+        """
         content = []
         content.append(f';<Request ID="2" Action="CREATE"><FB Name="EMB_RES" Type="EMB_RES" /></Request>')
         request_id = 3
@@ -57,7 +59,13 @@ class FileManager:
 
     @staticmethod
     def create_xml(list_blocks, block_start, coords_coef, with_gui=True, old_file_path='../projects/project1.xml'):
+        """
+        Create an XML file with the given blocks and connections.
+        """
         def find_connection(source_block, dest_block_name, source_el_name, dest_el_name):
+            """
+            Find the connection between two blocks.
+            """
             for block in list_blocks:
                 if block.name == dest_block_name:
                     dest_block = block
@@ -76,6 +84,9 @@ class FileManager:
                         return connection1
 
         def write_connections(parent_tag_event, parent_tag_data):
+            """
+            Write the connections to the XML file.
+            """
             for source_el, ar_elements in block.connections.items():
                 if ar_elements:
                     for dest_block_name, dest_el in ar_elements:
@@ -100,7 +111,7 @@ class FileManager:
         name_project = 'Original_project'
         date = datetime.now().strftime("%Y-%m-%d")
         root = ET.Element("System", Name=name_project, Comment="")
-        version_info = ET.SubElement(root, "VersionInfo", Version="1.0", Author="Simon", Date=date)
+        version_info = ET.SubElement(root, "VersionInfo", Version="1.0", Author="Art", Date=date)
         application = ET.SubElement(root, "Application", Name=f"{name_project}App", Comment="")
         sub_app_network = ET.SubElement(application, "SubAppNetwork")
 
@@ -120,12 +131,13 @@ class FileManager:
             if block is not block_start:
                 write_connections(event_connections, data_connections)
 
-        device = ET.SubElement(root, "Device", Name="FORTE_PC", Type="FORTE_PC", Comment="", x="693.3333333333334",
-                               y="653.3333333333334")
+        device = ET.SubElement(root, "Device", Name="FORTE_PC", Type="FORTE_PC", Comment="", x="700",
+                               y="700")
         parameter_device = ET.SubElement(device, "Parameter", Name="MGR_ID", Value='"localhost:61499"')
         attribute1 = ET.SubElement(device, "Attribute", Name="Profile", Type="STRING", Value="HOLOBLOC",
                                    Comment="device profile")
-        attribute2 = ET.SubElement(device, "Attribute", Name="Color", Type="STRING", Value="255,190,111", Comment="color")
+        attribute2 = ET.SubElement(device, "Attribute", Name="Color", Type="STRING", Value="255,190,111",
+                                   Comment="color")
         resource = ET.SubElement(device, "Resource", Name="EMB_RES", Type="EMB_RES", Comment="", x="0.0", y="0.0")
         fb_network = ET.SubElement(resource, "FBNetwork")
         for block in list_blocks:
@@ -142,8 +154,8 @@ class FileManager:
         for block in list_blocks:
             write_connections(event_connections_fb, data_connections_fb)
 
-        segment = ET.SubElement(root, "Segment", Name="Ethernet", Type="Ethernet", Comment="", x="1733.3333333333335",
-                               y="1600.0", dx1="2000.0")
+        segment = ET.SubElement(root, "Segment", Name="Ethernet", Type="Ethernet", Comment="", x="1700.0",
+                                y="1600.0", dx1="2000.0")
         attribute_segment = ET.SubElement(segment, "Attribute", Name="Color", Type="STRING", Value="161,130,236",
                                           Comment="color")
         link = ET.SubElement(root, "Link", SegmentName="Ethernet", CommResource="FORTE_PC", Comment="")
@@ -170,6 +182,9 @@ class FileManager:
 
     @staticmethod
     def read_xml(main_window):
+        """
+        Read an XML file and load the blocks and connections into the main window.
+        """
         try:
             main_window.clear()
             input_file = easygui.fileopenbox(filetypes=["*.xml"])
@@ -208,6 +223,9 @@ class FileManager:
 
     @staticmethod
     def create_connections(main_window, connections, color):
+        """
+        Create connections from the XML file and add them to the main window.
+        """
         for connection in connections.findall('Connection'):
             source = connection.get('Source')
             destination = connection.get('Destination')
@@ -235,7 +253,8 @@ class FileManager:
 
             main_window.current_connection = ConnectionManager(
                 QPoint(main_window.source_element.right() + 1, main_window.source_element.center().y()),
-                QPoint(main_window.destination_element.left() - 1, main_window.destination_element.center().y()), color=color)
+                QPoint(main_window.destination_element.left() - 1, main_window.destination_element.center().y()),
+                color=color)
             if main_window.current_connection.simple:
                 main_window.current_connection.simple_case(dx1=dx1)
             else:
