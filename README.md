@@ -143,11 +143,11 @@ This project is licensed under the MIT License.
 4. Сохраните проект с помощью меню "File".
 5. Разверните проект с помощью меню "Run".
 
-## Добавление Пользовательских Блоков
+## Добавление Пользовательских блоков
 
 Чтобы добавить свои собственные пользовательские блоки, следуйте этим шагам:
 
-1. **Определите Класс Блока**: Создайте новый класс в `custom_blocks.py`, который наследуется от `FuncBlock`.
+1. **Определите Класс блока**: Создайте новый класс в `custom_blocks.py`, который наследуется от `FuncBlock`.
 
     ```python
     from func_block import FuncBlock
@@ -157,7 +157,7 @@ This project is licensed under the MIT License.
             super().__init__(main_window, name=name, width=100, height=100, x=x, y=y, n_rects_left=2, n_rects_right=2, labels=['MyCustomBlock', 'REQ', 'IN', 'CNF', 'OUT'])
     ```
 
-2. **Создайте Функцию Блока**: Добавьте функцию для создания экземпляра вашего пользовательского блока в `custom_blocks.py`.
+2. **Создайте Функцию для инициализации блока**: Добавьте функцию для создания экземпляра вашего пользовательского блока в `custom_blocks.py`.
 
     ```python
     def create_my_custom_block(main_window):
@@ -167,7 +167,7 @@ This project is licensed under the MIT License.
         main_window.update_all()
     ```
 
-3. **Обновите Словарь Классов Блоков**: Добавьте ваш пользовательский класс блока в функцию `all_block_classes` в `custom_blocks.py`.
+3. **Обновите Словарь классов блоков**: Добавьте ваш пользовательский класс блока в функцию `all_block_classes` в `custom_blocks.py`.
 
     ```python
     def all_block_classes():
@@ -182,7 +182,7 @@ This project is licensed under the MIT License.
         return classes
     ```
 
-4. **Обновите Словарь Подсчета Блоков**: Добавьте ваш пользовательский блок в функцию `count_blocks` в `custom_blocks.py`.
+4. **Обновите Словарь подсчета блоков**: Добавьте ваш пользовательский блок в функцию `count_blocks` в `custom_blocks.py`.
 
     ```python
     def count_blocks():
@@ -196,7 +196,7 @@ This project is licensed under the MIT License.
         return count
     ```
 
-5. **Добавьте Действие Меню**: Добавьте действие в меню "Blocks" в `main_window.py` для создания вашего пользовательского блока.
+5. **Добавьте инициализаци. Меню**: Добавьте действие в меню "Blocks" в `main_window.py` для создания вашего пользовательского блока.
 
     ```python
     my_custom_block_action = QAction("MyCustomBlock", self)
