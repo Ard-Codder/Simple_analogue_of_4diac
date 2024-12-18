@@ -110,6 +110,8 @@ To add your own custom blocks, follow these steps:
 
 This project is licensed under the MIT License.
 
+---
+
 #### Russian
 
 # Редактор FB
