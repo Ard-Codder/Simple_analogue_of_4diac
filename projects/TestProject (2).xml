@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<System Name="Original_project" Comment="">
+    <VersionInfo Version="1.0" Author="Simon" Date="2024-12-17"/>
+    <Application Name="Original_projectApp" Comment="">
+        <SubAppNetwork>
+            <FB Name="INT2INT" Type="INT2INT" Comment="" x="1455" y="1570">
+                <Parameter Name="IN" Value="10"/>
+            </FB>
+            <FB Name="INT2INT_1" Type="INT2INT" Comment="" x="1840" y="500"/>
+            <FB Name="OUT_ANY_CONSOLE_1" Type="OUT_ANY_CONSOLE" Comment="" x="4190" y="1375">
+                <Parameter Name="QI" Value="1"/>
+            </FB>
+            <FB Name="F_ADD_1" Type="F_ADD" Comment="" x="2870" y="1465"/>
+            <EventConnections>
+                <Connection Source="INT2INT_1.CNF" Destination="F_ADD_1.REQ" Comment="" dx1="285"/>
+                <Connection Source="OUT_ANY_CONSOLE_1.CNF" Destination="INT2INT.REQ" Comment="" dx1="85" dx2="260" dy="710"/>
+                <Connection Source="OUT_ANY_CONSOLE_1.CNF" Destination="INT2INT_1.REQ" Comment="" dx1="540" dx2="280" dy="-465"/>
+                <Connection Source="F_ADD_1.CNF" Destination="OUT_ANY_CONSOLE_1.REQ" Comment="" dx1="295"/>
+            </EventConnections>
+            <DataConnections>
+                <Connection Source="INT2INT.OUT" Destination="F_ADD_1.IN2" Comment="" dx1="355"/>
+                <Connection Source="INT2INT_1.OUT" Destination="F_ADD_1.IN1" Comment="" dx1="160"/>
+                <Connection Source="F_ADD_1.OUT" Destination="OUT_ANY_CONSOLE_1.IN" Comment="" dx1="220"/>
+                <Connection Source="F_ADD_1.OUT" Destination="INT2INT_1.IN" Comment="" dx1="130" dx2="55" dy="-570"/>
+            </DataConnections>
+        </SubAppNetwork>
+    </Application>
+    <Device Name="FORTE_PC" Type="FORTE_PC" Comment="" x="700" y="700">
+        <Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;"/>
+        <Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+        <Attribute Name="Color" Type="STRING" Value="200,200,200" Comment="color"/>
+        <Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+            <FBNetwork>
+                <FB Name="INT2INT" Type="INT2INT" Comment="" x="1455" y="1570">
+                    <Parameter Name="IN" Value="10"/>
+                </FB>
+                <FB Name="INT2INT_1" Type="INT2INT" Comment="" x="1840" y="500"/>
+                <FB Name="OUT_ANY_CONSOLE_1" Type="OUT_ANY_CONSOLE" Comment="" x="4190" y="1375">
+                    <Parameter Name="QI" Value="1"/>
+                </FB>
+                <FB Name="F_ADD_1" Type="F_ADD" Comment="" x="2870" y="1465"/>
+                <EventConnections>
+                    <Connection Source="START.COLD" Destination="INT2INT_1.REQ" Comment="" dx1="260"/>
+                    <Connection Source="START.COLD" Destination="INT2INT.REQ" Comment="" dx1="100" dx2="100" dy="530"/>
+                    <Connection Source="INT2INT_1.CNF" Destination="F_ADD_1.REQ" Comment="" dx1="285"/>
+                    <Connection Source="OUT_ANY_CONSOLE_1.CNF" Destination="INT2INT.REQ" Comment="" dx1="85" dx2="260" dy="710"/>
+                    <Connection Source="OUT_ANY_CONSOLE_1.CNF" Destination="INT2INT_1.REQ" Comment="" dx1="540" dx2="280" dy="-465"/>
+                    <Connection Source="F_ADD_1.CNF" Destination="OUT_ANY_CONSOLE_1.REQ" Comment="" dx1="295"/>
+                </EventConnections>
+                <DataConnections>
+                    <Connection Source="INT2INT.OUT" Destination="F_ADD_1.IN2" Comment="" dx1="355"/>
+                    <Connection Source="INT2INT_1.OUT" Destination="F_ADD_1.IN1" Comment="" dx1="160"/>
+                    <Connection Source="F_ADD_1.OUT" Destination="OUT_ANY_CONSOLE_1.IN" Comment="" dx1="220"/>
+                    <Connection Source="F_ADD_1.OUT" Destination="INT2INT_1.IN" Comment="" dx1="130" dx2="55" dy="-570"/>
+                </DataConnections>
+            </FBNetwork>
+        </Resource>
+    </Device>
+    <Segment Name="Ethernet" Type="Ethernet" Comment="" x="1733.3333333333335" y="1600.0" dx1="2000.0">
+        <Attribute Name="Color" Type="STRING" Value="161,130,236" Comment="color"/>
+    </Segment>
+    <Link SegmentName="Ethernet" CommResource="FORTE_PC" Comment=""/>
+</System>

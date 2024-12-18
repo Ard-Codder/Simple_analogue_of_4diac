@@ -1,0 +1,18 @@
+;<Request ID="2" Action="CREATE"><FB Name="EMB_RES" Type="EMB_RES" /></Request>
+EMB_RES;<Request ID="3" Action="CREATE"><FB Name="INT2INT" Type="INT2INT" /></Request>
+EMB_RES;<Request ID="4" Action="WRITE"><Connection Source="10" Destination="INT2INT.IN" /></Request>
+EMB_RES;<Request ID="5" Action="CREATE"><FB Name="INT2INT_1" Type="INT2INT" /></Request>
+EMB_RES;<Request ID="6" Action="CREATE"><FB Name="OUT_ANY_CONSOLE_1" Type="OUT_ANY_CONSOLE" /></Request>
+EMB_RES;<Request ID="7" Action="WRITE"><Connection Source="1" Destination="OUT_ANY_CONSOLE_1.QI" /></Request>
+EMB_RES;<Request ID="8" Action="CREATE"><FB Name="F_ADD_1" Type="F_ADD" /></Request>
+EMB_RES;<Request ID="9" Action="CREATE"><Connection Source="START.COLD" Destination="INT2INT_1.REQ" /></Request>
+EMB_RES;<Request ID="10" Action="CREATE"><Connection Source="START.COLD" Destination="INT2INT.REQ" /></Request>
+EMB_RES;<Request ID="11" Action="CREATE"><Connection Source="INT2INT.OUT" Destination="F_ADD_1.IN2" /></Request>
+EMB_RES;<Request ID="12" Action="CREATE"><Connection Source="INT2INT_1.CNF" Destination="F_ADD_1.REQ" /></Request>
+EMB_RES;<Request ID="13" Action="CREATE"><Connection Source="INT2INT_1.OUT" Destination="F_ADD_1.IN1" /></Request>
+EMB_RES;<Request ID="14" Action="CREATE"><Connection Source="OUT_ANY_CONSOLE_1.CNF" Destination="INT2INT.REQ" /></Request>
+EMB_RES;<Request ID="15" Action="CREATE"><Connection Source="OUT_ANY_CONSOLE_1.CNF" Destination="INT2INT_1.REQ" /></Request>
+EMB_RES;<Request ID="16" Action="CREATE"><Connection Source="F_ADD_1.CNF" Destination="OUT_ANY_CONSOLE_1.REQ" /></Request>
+EMB_RES;<Request ID="17" Action="CREATE"><Connection Source="F_ADD_1.OUT" Destination="OUT_ANY_CONSOLE_1.IN" /></Request>
+EMB_RES;<Request ID="18" Action="CREATE"><Connection Source="F_ADD_1.OUT" Destination="INT2INT_1.IN" /></Request>
+EMB_RES;<Request ID="18" Action="START"/>
