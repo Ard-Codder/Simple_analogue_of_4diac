@@ -1,4 +1,5 @@
-### Updated README with `requirements.txt`
+![image](https://github.com/user-attachments/assets/ae3a27f9-d587-46eb-95e9-8d5c0c8ac253)
+
 
 #### English
 
