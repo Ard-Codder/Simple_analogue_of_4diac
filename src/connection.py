@@ -1,5 +1,6 @@
-from PyQt5.QtGui import QPainter, QPen, QCursor, QPolygon, QColor
-from PyQt5.QtCore import Qt, QLine, QPoint, QRect
+from PyQt5.QtCore import QLine, QPoint, QRect
+from PyQt5.QtGui import QPolygon
+
 
 class ConnectionManager:
     def __init__(self, point_source, point_destination, color='black'):

@@ -2,8 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QMenu, QLabel, QColorDialog, QStyleFactory
 from PyQt5.QtGui import QPainter, QColor, QPen, QCursor, QFont, QBrush, QPainterPath
 from PyQt5.QtCore import Qt, QPoint
-from func_block import FuncBlock
-from file_handler import FileHandler
+from file_manager import FileManager
 from tcp_sender import TcpSender
 from connection import ConnectionManager
 import custom_blocks as cb
@@ -11,11 +10,11 @@ import custom_blocks as cb
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Functional Block Editor")
+        self.setWindowTitle("IDE - FB Editor")
         self.setGeometry(100, 100, 1200, 800)
         self.blocks = []
         self.start_block = None
-        self.file_path = '../project_files/project1.xml'
+        self.file_path = '../projects/project1.xml'
         self.label = QLabel("", self)
         self.label.setGeometry(10, 10, 300, 100)
         self.current_x = 300
@@ -126,7 +125,7 @@ class MainWindow(QMainWindow):
                 painter.drawText(rect, Qt.AlignCenter, rect.name)
 
         for connection in self.connections:
-            pen = QPen(QColor(connection.color), 2)  # Увеличиваем толщину линии
+            pen = QPen(QColor(connection.color), 2)
             brush = QBrush(QColor(connection.color))
             painter.setPen(pen)
             painter.setBrush(brush)
@@ -165,7 +164,7 @@ class MainWindow(QMainWindow):
         self.last_mouse_pos = event.pos()
         self.label.setText(f"Mouse position (Pressed): ({self.current_x}, {self.current_y})")
         self.label.adjustSize()
-        self.label.move(10, 60)  # Опускаем надпись с координатами ниже
+        self.label.move(10, 60)
 
         self.movable_connection, self.coord = self.check_moving_connect(event)
         self.source_element = self.find_connect_element(is_left_flag=False)
@@ -224,7 +223,7 @@ class MainWindow(QMainWindow):
         y = event.y()
         self.label.setText(f"Mouse position: ({x}, {y})")
         self.label.adjustSize()
-        self.label.move(10, 60)  # Опускаем надпись с координатами ниже
+        self.label.move(10, 60)
         self.update()
 
     def mouseMoveEvent(self, event):
@@ -233,7 +232,7 @@ class MainWindow(QMainWindow):
         if self.pressed:
             self.label.setText(f"Mouse position (Pressed): ({self.current_x}, {self.current_y})")
             self.label.adjustSize()
-            self.label.move(10, 60)  # Опускаем надпись с координатами ниже
+            self.label.move(10, 60)
             if self.current_block:
                 self.current_block.change_coords(self.current_x, self.current_y)
             elif self.drawing_connection:
@@ -243,7 +242,7 @@ class MainWindow(QMainWindow):
         else:
             self.label.setText(f"Mouse position: ({self.current_x}, {self.current_y})")
             self.label.adjustSize()
-            self.label.move(10, 60)  # Опускаем надпись с координатами ниже
+            self.label.move(10, 60)
             self.check_moving_connect(event)
 
         self.last_mouse_pos = event.pos()
@@ -291,13 +290,13 @@ class MainWindow(QMainWindow):
 
     def create_actions(self):
         open_project_action = QAction("Open", self)
-        open_project_action.triggered.connect(lambda: FileHandler.read_xml(self))
+        open_project_action.triggered.connect(lambda: FileManager.read_xml(self))
 
         create_xml_action = QAction("Save as XML", self)
-        create_xml_action.triggered.connect(lambda: FileHandler.create_xml(self.blocks, self.start_block, self.coords_coef))
+        create_xml_action.triggered.connect(lambda: FileManager.create_xml(self.blocks, self.start_block, self.coords_coef))
 
         create_fboot_action = QAction("Create fboot file", self)
-        create_fboot_action.triggered.connect(lambda: FileHandler.create_fboot(self.blocks, self.start_block))
+        create_fboot_action.triggered.connect(lambda: FileManager.create_fboot(self.blocks, self.start_block))
 
         self.menu_file.addAction(open_project_action)
         self.menu_file.addAction(create_xml_action)
@@ -329,8 +328,8 @@ class MainWindow(QMainWindow):
         self.menu_run.addAction(deploy_action)
 
     def deploy(self):
-        FileHandler.create_fboot(self.blocks, self.start_block, with_gui=False)
-        TcpSender('../project_files/deploy.fboot')
+        FileManager.create_fboot(self.blocks, self.start_block, with_gui=False)
+        TcpSender('../projects/deploy.fboot')
 
     def show_connections(self):
         for block in self.blocks:

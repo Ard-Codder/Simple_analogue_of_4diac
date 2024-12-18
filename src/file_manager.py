@@ -8,7 +8,7 @@ from connection import ConnectionManager
 import custom_blocks as cb
 
 
-class FileHandler:
+class FileManager:
     @staticmethod
     def create_fboot(list_blocks, block_start, with_gui=True):
         content = []
@@ -46,7 +46,7 @@ class FileHandler:
                 filetypes=["*.fboot"]
             )
         else:
-            file_path = '../project_files/deploy.fboot'
+            file_path = '../projects/deploy.fboot'
         try:
             with open(file_path, "w", encoding='utf-8') as f:
                 for line in content:
@@ -56,7 +56,7 @@ class FileHandler:
             print("Fboot file creating error")
 
     @staticmethod
-    def create_xml(list_blocks, block_start, coords_coef, with_gui=True, old_file_path='../project_files/project1.xml'):
+    def create_xml(list_blocks, block_start, coords_coef, with_gui=True, old_file_path='../projects/project1.xml'):
         def find_connection(source_block, dest_block_name, source_el_name, dest_el_name):
             for block in list_blocks:
                 if block.name == dest_block_name:
@@ -199,8 +199,8 @@ class FileHandler:
 
             event_connections = fb_network.find('EventConnections')
             data_connections = fb_network.find('DataConnections')
-            FileHandler.create_connections(main_window, event_connections, 'gray')
-            FileHandler.create_connections(main_window, data_connections, 'black')
+            FileManager.create_connections(main_window, event_connections, 'gray')
+            FileManager.create_connections(main_window, data_connections, 'black')
             main_window.update_all()
         except Exception as e:
             print("File reading error")
